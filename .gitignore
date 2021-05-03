@@ -39,6 +39,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+# Typescript transpile files
+dist/
+
 # Typescript v1 declaration files
 typings/
 
