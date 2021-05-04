@@ -1,10 +1,16 @@
-import { FC, Fragment } from "react";
+import { FC, Fragment, useEffect } from "react";
 import { useTypeSelector } from "../../hooks/useTypeSelector";
 import { AddCell } from "../AddCell";
 import { CellListItem } from "../CellListItem";
+import { useActions } from "../../hooks/useActions";
 import "./CellList.css";
 
 const CellList: FC = () => {
+  const { fetchCells } = useActions();
+  useEffect(() => {
+    fetchCells();
+  }, []);
+
   const cells = useTypeSelector(({ cells: { order, data } }) =>
     order.map((id) => data[id])
   );

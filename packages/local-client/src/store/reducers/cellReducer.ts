@@ -52,6 +52,26 @@ const reducer = produce((draft: CellState, action: Action) => {
       if (foundIndex < 0) draft.order.unshift(cell.id);
       else draft.order.splice(foundIndex + 1, 0, cell.id);
       break;
+    case CellActionType.FETCH_CELLS:
+      draft.loading = true;
+      draft.error = null;
+      break;
+    case CellActionType.FETCH_CELLS_COMPLETE:
+      draft.loading = false;
+      draft.error = null;
+      draft.order = action.payload.map((cell) => cell.id);
+      draft.data = action.payload.reduce((acc, cell) => {
+        acc[cell.id] = cell;
+        return acc;
+      }, {} as CellState["data"]);
+      break;
+    case CellActionType.FETCH_CELLS_ERROR:
+      draft.loading = false;
+      draft.error = action.payload;
+      break;
+    case CellActionType.SAVE_CELLS_ERROR:
+      draft.error = action.payload;
+      break;
   }
 }, initialState);
 

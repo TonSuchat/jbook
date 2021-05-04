@@ -1,5 +1,5 @@
 import { CellActionType } from "../constants";
-import { CellDirection, CellTypes } from "../state/cell";
+import { Cell, CellDirection, CellTypes } from "../state/cell";
 
 export type MoveCellAction = {
   type: CellActionType.MOVE_CELL;
@@ -48,10 +48,33 @@ export type BundleCompleteAction = {
   };
 };
 
+export type FetchCellsAction = {
+  type: CellActionType.FETCH_CELLS;
+};
+
+export type FetchCellsCompleteAction = {
+  type: CellActionType.FETCH_CELLS_COMPLETE;
+  payload: Cell[];
+};
+
+export type FetchCellsErrorAction = {
+  type: CellActionType.FETCH_CELLS_ERROR;
+  payload: string;
+};
+
+export type SaveCellsErrorAction = {
+  type: CellActionType.SAVE_CELLS_ERROR;
+  payload: string;
+};
+
 export type Action =
   | MoveCellAction
   | DeleteCellAction
   | InsertCellAfterAction
   | UpdateCellAction
   | BundleStartAction
-  | BundleCompleteAction;
+  | BundleCompleteAction
+  | FetchCellsAction
+  | FetchCellsCompleteAction
+  | FetchCellsErrorAction
+  | SaveCellsErrorAction;
