@@ -6,14 +6,14 @@ import { useActions } from "../../hooks/useActions";
 import "./CellList.css";
 
 const CellList: FC = () => {
+  const cells = useTypeSelector(({ cells: { order, data } }) =>
+    order.map((id) => data[id])
+  );
+
   const { fetchCells } = useActions();
   useEffect(() => {
     fetchCells();
   }, []);
-
-  const cells = useTypeSelector(({ cells: { order, data } }) =>
-    order.map((id) => data[id])
-  );
 
   const renderedCells = cells.map((cell) => (
     <Fragment key={cell.id}>
